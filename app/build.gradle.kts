@@ -30,5 +30,7 @@ sonar {
     properties {
         property("sonar.projectKey", "AlekseyKurnakov_java-project-78")
         property("sonar.organization", "alekseykurnakov")
+        property("sonar.projectName", "java-project-78")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
