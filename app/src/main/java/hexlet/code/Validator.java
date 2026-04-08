@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.StringSchema;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
