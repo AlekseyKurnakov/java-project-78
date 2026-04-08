@@ -17,9 +17,11 @@ public class NumberSchema {
     public void required() {
         required = true;
     }
+
     public void positive() {
-        positive = 0;
+        positive = 1;
     }
+
     public void range(int min, int max) {
         if (min > max) {
             int maxNum = min;
@@ -32,14 +34,16 @@ public class NumberSchema {
 
     public boolean isValid(Integer num) {
         if (required) {
-            if(num == null) {
+            if (num == null) {
                 return false;
             }
         }
-        if (positive != null && num < positive) {
-            return false;
+        if (positive != null && num != null) {
+            if (num < positive) {
+                return false;
+            }
         }
-        if (!range.isEmpty()) {
+        if (!range.isEmpty() && num != null) {
             int min = range.get("min");
             int max = range.get("max");
             if (num < min || num > max) {
