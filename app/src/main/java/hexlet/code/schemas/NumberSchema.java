@@ -1,55 +1,23 @@
 package hexlet.code.schemas;
 
-import java.util.HashMap;
-import java.util.Map;
 
-public class NumberSchema {
-    private boolean required;
-    private Integer positive;
-    private Map<String, Integer> range;
+public class NumberSchema extends BaseSchema<Integer> {
 
-    public NumberSchema() {
-        required = false;
-        positive = null;
-        range = new HashMap<>();
+    public NumberSchema required() {
+        addValidator("required", value -> value != null);
+        return this;
     }
 
-    public void required() {
-        required = true;
+    public NumberSchema positive() {
+        addValidator("positive", value -> value == null || value > 0);
+        return this;
     }
 
-    public void positive() {
-        positive = 1;
-    }
+    public NumberSchema range(int min, int max) {
+        int left = Math.min(min, max);
+        int right = Math.max(min, max);
 
-    public void range(int min, int max) {
-        if (min > max) {
-            int maxNum = min;
-            min = max;
-            max = maxNum;
-        }
-        range.put("min", min);
-        range.put("max", max);
-    }
-
-    public boolean isValid(Integer num) {
-        if (required) {
-            if (num == null) {
-                return false;
-            }
-        }
-        if (positive != null && num != null) {
-            if (num < positive) {
-                return false;
-            }
-        }
-        if (!range.isEmpty() && num != null) {
-            int min = range.get("min");
-            int max = range.get("max");
-            if (num < min || num > max) {
-                return false;
-            }
-        }
-        return true;
+        addValidator("range", value -> value == null || (value >= left && value <= right));
+        return this;
     }
 }
