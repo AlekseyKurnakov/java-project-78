@@ -13,7 +13,8 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
         addValidator("sizeof", value -> value == null || value.size() == size);
         return this;
     }
-    public MapSchema shape(Map<String, BaseSchema<?>> schemas) {
+
+    public MapSchema shape(Map<String, ? extends BaseSchema<?>> schemas) {
         addValidator("shape", value -> {
             if (value == null) {
                 return true;
@@ -37,5 +38,4 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
 
         return this;
     }
-
 }
