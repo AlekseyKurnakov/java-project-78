@@ -1,7 +1,7 @@
 package hexlet.code.schemas;
 
 
-public class NumberSchema extends BaseSchema<Integer> {
+public final class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {
         addValidator("required", value -> value != null);
