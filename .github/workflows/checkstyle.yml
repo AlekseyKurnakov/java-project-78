@@ -18,4 +18,5 @@ jobs:
           java-version: 21
 
       - name: Run Checkstyle
-        run: ./app/gradlew checkstyleMain checkstyleTest
+        working-directory: app
+        run: ./gradlew checkstyleMain checkstyleTest
