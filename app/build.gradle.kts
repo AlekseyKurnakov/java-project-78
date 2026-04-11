@@ -25,6 +25,16 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
 }
 
 checkstyle {
@@ -32,14 +42,16 @@ checkstyle {
     configFile = file("config/checkstyle/checkstyle.xml")
     isIgnoreFailures = false
 }
+
+jacoco {
+    toolVersion = "0.8.14"
+}
+
 sonar {
     properties {
         property("sonar.projectKey", "AlekseyKurnakov_java-project-78")
         property("sonar.organization", "alekseykurnakov")
         property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
-}
-jacoco {
-    toolVersion = "0.8.14"
 }
 
